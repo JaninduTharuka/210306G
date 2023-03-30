@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+using namespace std;
+
+
+// Insert n after i th position.
+vector<int> insert(vector<int> list,int i,int n) {
+    std::vector<int> list2;
+    for (int x=0;x<=i;x++) {
+        list2.push_back(list[x]);
+    }
+    list2.push_back(n);
+    for (int y=i+1;y<=list.size();y++) {
+        list2.push_back(list[y]);
+    }
+    return list2;
+}
+
+void median(int n) {
+    std::vector<int> List;
+    int List2[n];
+    for (int k=0;k<n;k++) {
+        List2[k]=rand()%100;
+    }
+    for (int y=0;y<n;y++) {
+            cout<<List2[y]<<" ";
+    }
+    cout<<endl;
+    for(int i=0;i<n;i++) {
+        int e = List2[i];
+        if (List.size()==0) {
+            List.push_back(e);
+        }else {
+            int j=0;
+            while (e>List[j]) {
+                j++;
+            }
+            List=insert(List,j-1,e);
+        }
+        cout<<"[";
+        for (int x=0;x<=i;x++) {
+            cout<<List[x];
+            if(x<i) {
+                cout<<",";
+            }
+        }
+        cout<<"]"<<endl;
+        cout<<"Median = ";
+        if ((i+1)%2==1) {                    // Find Median of odd array.
+            float M=List[i/2];
+            printf("%.1f\n",M);
+        }else {
+            float M=(float((List[i/2]+List[(i/2)+1]))/2);     // Find Median of even array.
+            printf("%.1f\n",M);
+        }
+    }
+    
+}
+
+int main() {
+    cout<<"Give num of elements :";
+    int n;
+    cin>>n;
+    median(n);
+}
